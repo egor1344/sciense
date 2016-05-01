@@ -1,0 +1,18 @@
+{% extends "university/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ uni.name_s}}
+{% endblock %}
+
+{% block content %}
+<h2>{{ uni.name_s }}</h2>
+    {% for tp in tp_list %}
+        <div class = 'list_tp'>
+        {{ tp.name }}
+        {{ tp.cod }}
+        {{ tp.about }}
+        {{ tp.uni }}
+        </div>
+    {% endfor %}
+{% endblock %}

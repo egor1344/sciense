@@ -1,0 +1,18 @@
+{% extends "university/base.html" %}
+{% load static %}
+
+{% block title %}
+    Uni list
+{% endblock %}
+
+{% block content %}
+    {% for uni in uni_list %}
+        <div class = 'list_uni'>
+        <a href="{{ uni.get_absolute_url }}">
+            {{ uni.name_s }}
+        </a>
+        {{ uni.name_f }}
+        {{ uni.about }}
+        </div>
+    {% endfor %}
+{% endblock %}
