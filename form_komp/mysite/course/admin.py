@@ -13,16 +13,6 @@ class PredCourseLine(admin.StackedInline):
         return extra
 
 
-class CompetenceLine(admin.StackedInline):
-    model = Competence
-
-    # def get_extra(self, request, obj=None, **kwargs):
-    #     extra = 1
-    #     if obj:
-    #         return extra
-    #     return extra
-
-
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['name', 'tr']
     prepopulated_fields = {'slug': ('name',)}

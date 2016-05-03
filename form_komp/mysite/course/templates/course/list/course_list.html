@@ -1,0 +1,17 @@
+{% extends "course/base.html" %}
+{% load static %}
+
+{% block title %}
+    Course list
+{% endblock %}
+
+{% block content %}
+    {% for course in c_list %}
+        <div class = 'list_tp'>
+        <a href="{% url 'course:course_detail' course.tr.slug course.slug %}">
+            {{ course.name }}
+        </a>
+        {{ course.about }}
+        </div>
+    {% endfor %}
+{% endblock %}

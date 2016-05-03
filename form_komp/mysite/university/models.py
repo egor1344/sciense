@@ -28,3 +28,7 @@ class TrainingPrograms(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('course:course_list',
+            args = [self.slug])

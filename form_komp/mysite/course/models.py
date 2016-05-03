@@ -13,9 +13,9 @@ class Course(models.Model):
 
 
 class PredCourse(models.Model):
-    cours = models.ForeignKey('Course',
+    cours = models.ForeignKey(Course,
                               related_name='pr_cours')
-    prcours = models.ManyToManyField('Course',
+    prcours = models.ManyToManyField(Course,
                                      related_name='pr_predcours',
                                      blank=True)
 
@@ -24,7 +24,7 @@ class Competence(models.Model):
     cod = models.CharField(max_length=6)
     about = models.TextField()
     tr = models.ForeignKey(TrainingPrograms)
-    course = models.ManyToManyField('Course')
+    course = models.ManyToManyField(Course)
 
     def __str__(self):
         return self.cod

@@ -1,0 +1,20 @@
+{% extends "course/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ cours.name }}
+{% endblock %}
+
+{% block content %}
+    {% for comp in comp_list %}
+        <div class = 'comp_list'>
+            {{ comp.cod }}
+            {{ comp.about }}
+        </div>
+    {% endfor %}
+    {% for pred in pred_list %}
+        <div class = 'pred_list'>
+            {{ pred }}
+        </div>
+    {% endfor %}
+{% endblock %}

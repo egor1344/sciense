@@ -9,7 +9,9 @@
 <h2>{{ uni.name_s }}</h2>
     {% for tp in tp_list %}
         <div class = 'list_tp'>
-        {{ tp.name }}
+        <a href="{{ tp.get_absolute_url }}">
+            {{ tp.name }}
+        </a>
         {{ tp.cod }}
         {{ tp.about }}
         {{ tp.uni }}
