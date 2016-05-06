@@ -1,20 +1,19 @@
-{% extends "course/base.html" %}
+{% extends "university/base.html" %}
 {% load static %}
-
 {% block title %}
     {{ cours.name }}
 {% endblock %}
 
 {% block content %}
+    {% for pred , comp in predcomp_list.items %}
+    <div class="predcomp_list">
+        {{ pred }} : {{ comp }}
+    </div>
+    {% endfor %}
     {% for comp in comp_list %}
         <div class = 'comp_list'>
             {{ comp.cod }}
             {{ comp.about }}
-        </div>
-    {% endfor %}
-    {% for pred in pred_list %}
-        <div class = 'pred_list'>
-            {{ pred }}
         </div>
     {% endfor %}
 {% endblock %}
