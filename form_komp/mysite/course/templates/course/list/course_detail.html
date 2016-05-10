@@ -1,19 +1,52 @@
 {% extends "university/base.html" %}
 {% load static %}
+
 {% block title %}
     {{ cours.name }}
 {% endblock %}
 
 {% block content %}
-    {% for pred , comp in predcomp_list.items %}
-    <div class="predcomp_list">
-        {{ pred }} : {{ comp }}
-    </div>
-    {% endfor %}
+  {% if predcomp_list %}
+    <table>
+      <caption>Входящие компетенции</caption>
+      <tr>
+        <th>Код компетецнии</th>
+        <th>Описание компетенции</th>
+        <th>Дисциплина</th>
+      </tr>
+      {% for pred , comp_list in predcomp_list.items %}
+        {% for comp in comp_list %}
+          <tr>
+            <td>{{ comp.cod }}</td>
+            <td>{{ comp.about }}</td>
+            <td>
+              <a href="{% url 'course:course_detail' pred.tr.slug pred.slug %}">
+                {{ pred }}
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <h2>Входящих компетенций нет</h2>
+  {% endif %}
+
+  {% if comp_list %}
+  <table>
+  <caption>Выходящие компетенции</caption>
+    <tr>
+      <th>Код компетецнии</th>
+      <th>Описание компетенции</th>
+    </tr>
     {% for comp in comp_list %}
-        <div class = 'comp_list'>
-            {{ comp.cod }}
-            {{ comp.about }}
-        </div>
+    <tr>
+      <td>{{ comp.cod }}</td>
+      <td>{{ comp.about }}</td>
+    </tr>
     {% endfor %}
+  </table>
+  {% else %}
+    <h2>Выходящих компетенций нет</h2>
+  {% endif %}
 {% endblock %}

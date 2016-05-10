@@ -14,6 +14,7 @@ class PredCourseLine(admin.StackedInline):
 
 
 class CourseAdmin(admin.ModelAdmin):
+    actions_on_bottom = True
     list_display = ['name', 'tr']
     prepopulated_fields = {'slug': ('name',)}
     inlines = [
