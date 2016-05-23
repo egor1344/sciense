@@ -5,5 +5,34 @@ a{
 
 .list_uni{
     position: relative;
-    margin: auto;
+    margin: 10px 10%;
+}
+
+h2{
+    text-align: center;
+}
+
+.list_tp{
+    position: relative;
+    margin: 10px 10%;
+}
+
+.hide th{
+    text-align: center;
+}
+
+table td{
+    text-align: center
+}
+
+.opis{
+    text-align: left;    
+}
+
+.enter_comp{
+    margin: 20px 10% 70px 10%;
+}
+
+.exit_comp{
+    margin: 10px 10%
 }

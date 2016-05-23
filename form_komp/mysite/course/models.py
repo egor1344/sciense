@@ -6,7 +6,7 @@ class Course(models.Model):
                             db_index=True)
     about = models.TextField(blank=True)
     tr = models.ForeignKey(TrainingPrograms)
-    slug = models.SlugField(max_length=20)
+    slug = models.SlugField(max_length=40)
 
     def __str__(self):
         return self.name

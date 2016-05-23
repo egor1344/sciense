@@ -7,9 +7,9 @@
 
 {% block content %}
   {% if predcomp_list %}
-    <table>
-      <caption>Входящие компетенции</caption>
-      <tr>
+    <table class="enter_comp">
+      <caption><h2>Входящие компетенции</h2></caption>
+      <tr class="hide">
         <th>Код компетецнии</th>
         <th>Описание компетенции</th>
         <th>Дисциплина</th>
@@ -18,7 +18,7 @@
         {% for comp in comp_list %}
           <tr>
             <td>{{ comp.cod }}</td>
-            <td>{{ comp.about }}</td>
+            <td class="opis">{{ comp.about }}</td>
             <td>
               <a href="{% url 'course:course_detail' pred.tr.slug pred.slug %}">
                 {{ pred }}
@@ -33,20 +33,20 @@
   {% endif %}
 
   {% if comp_list %}
-  <table>
-  <caption>Выходящие компетенции</caption>
-    <tr>
+  <table class="exit_comp">
+  <caption><h2>Исходящие компетенции</h2></caption>
+    <tr class="hide">
       <th>Код компетецнии</th>
       <th>Описание компетенции</th>
     </tr>
     {% for comp in comp_list %}
     <tr>
       <td>{{ comp.cod }}</td>
-      <td>{{ comp.about }}</td>
+      <td class="opis">{{ comp.about }}</td>
     </tr>
     {% endfor %}
   </table>
   {% else %}
-    <h2>Выходящих компетенций нет</h2>
+    <h2>Исходящих компетенций нет</h2>
   {% endif %}
 {% endblock %}
