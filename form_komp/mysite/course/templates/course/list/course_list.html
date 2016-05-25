@@ -6,6 +6,12 @@
 {% endblock %}
 
 {% block content %}
+<div>
+    <h2>Список дисциплин</h2>
+    <a href="{% url 'course:trainprog_xlsx' slug %}">
+        Сформированные компетенции по дисциплинам
+    </a>
+</div>
     {% for course in c_list %}
         <div class = 'list_tp'>
         <a href="{% url 'course:course_detail' course.tr.slug course.slug %}">

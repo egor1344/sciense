@@ -9,7 +9,7 @@
 <h2>{{ uni.name_s }}</h2>
     {% for tp in tp_list %}
         <div class = 'list_tp'>
-        <a href="{{ tp.get_absolute_url }}">
+        <a href="{% url 'course:course_list' tp.slug %}">
             {{ tp.name }}
         </a><br>
         {{ tp.cod }}<br>

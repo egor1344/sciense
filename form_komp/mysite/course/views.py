@@ -26,13 +26,11 @@ def course_list(request, slug):
     c_list = Course.objects.filter(tr__slug=slug)
     return render(request,
                   "course/list/course_list.html",
-                  {'c_list': c_list})
+                  {'c_list': c_list,
+                   'slug': slug})
 
 
 def course_detail(request, slug, slug_c):
-    """
-        Всю эту хуйню переделать
-    """
     course = Course.objects.get(slug=slug_c)
     comp_list, predcomp_list = form_komp(course)
     return render(request,
@@ -45,12 +43,12 @@ def course_xlsx(request, slug, slug_c):
     response = HttpResponse(content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename="Course.xlsx"'
 
+
     course = Course.objects.get(slug=slug_c)
     list_comp, predcomp_list = form_komp(course)
     wb = Workbook()
     ws = wb.active
     ws.append(['Название дисциплины', course.name ])
-    ws.append([])
     if predcomp_list:
         ws.append(['Входящие компетенции'])
         ws.append(["Код","Описание","Предшествующая дисциплина"])
@@ -59,7 +57,6 @@ def course_xlsx(request, slug, slug_c):
                 ws.append([comp.cod,comp.about,pred.name])
     else:
         ws.append(['Входящих компетенций нет'])
-    ws.append([])
 
     if list_comp:
         ws.append(['Исходящие компетенции'])
@@ -69,5 +66,39 @@ def course_xlsx(request, slug, slug_c):
     else:
         ws.append(['Исходящих компетенций нет'])
 
+    wb.save(response)
+    return response
+
+def trainprog_xlsx(request, slug):
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="All_Course.xlsx"'
+
+
+    c_list = Course.objects.filter(tr__slug=slug)
+    wb = Workbook()
+    ws = wb.active
+    ws.title = 'Дисциплины'
+    ws['A1'] = 'Сохраненые дисциплины'
+    for course in c_list:
+        ws.append([course.name])
+    for course in c_list:
+        list_comp, predcomp_list = form_komp(course)
+        ws = wb.create_sheet(course.name[:30])
+        if predcomp_list:
+            ws.append(['Входящие компетенции'])
+            ws.append(["Код","Описание","Предшествующая дисциплина"])
+            for pred, comp_list in predcomp_list.items():
+                for comp in comp_list:
+                    ws.append([comp.cod,comp.about,pred.name])
+        else:
+            ws.append(['Входящих компетенций нет'])
+
+        if list_comp:
+            ws.append(['Исходящие компетенции'])
+            ws.append(["Код","Описание"])
+            for comp in list_comp:
+                ws.append([comp.cod, comp.about])
+        else:
+            ws.append(['Исходящих компетенций нет'])
     wb.save(response)
     return response
