@@ -49,4 +49,9 @@
   {% else %}
     <h2>Исходящих компетенций нет</h2>
   {% endif %}
+  {% if comp_list and predcomp_list%}
+    <div class="Download">
+      <a href="{% url 'course:course_xlsx' course.tr.slug course.slug %}">Скачать файл xlsx</a>
+    </div>
+  {% endif %}
 {% endblock %}
